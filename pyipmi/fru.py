@@ -254,7 +254,7 @@ class InventoryChassisInfoArea(CommonInfoArea):
     TYPE_RACK_MOUNT_CHASSIS = 23
 
     def _from_data(self, data, ignore_checksum=False):
-        CommonInfoArea._from_data(self, data)
+        CommonInfoArea._from_data(self, data, ignore_checksum=False)
         self.type = data[2]
         offset = 3
         self.part_number = FruTypeLengthString(data, offset)
