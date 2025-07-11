@@ -438,7 +438,7 @@ class FruInventory(object):
 
     def _from_data(self, data, ignore_checksum=False):
         self.raw = data
-        self.common_header = InventoryCommonHeader(data[:8])
+        self.common_header = InventoryCommonHeader(data[:8], ignore_checksum=ignore_checksum)
 
         if self.common_header.chassis_info_area_offset:
             self.chassis_info_area = InventoryChassisInfoArea(
