@@ -254,7 +254,7 @@ class InventoryChassisInfoArea(CommonInfoArea):
     TYPE_RACK_MOUNT_CHASSIS = 23
 
     def _from_data(self, data, ignore_checksum=False):
-        CommonInfoArea._from_data(self, data, ignore_checksum=False)
+        CommonInfoArea._from_data(self, data, ignore_checksum=ignore_checksum)
         self.type = data[2]
         offset = 3
         self.part_number = FruTypeLengthString(data, offset)
@@ -287,7 +287,7 @@ class InventoryBoardInfoArea(CommonInfoArea):
 
 class InventoryProductInfoArea(CommonInfoArea):
     def _from_data(self, data, ignore_checksum=False):
-        CommonInfoArea._from_data(self, data)
+        CommonInfoArea._from_data(self, data, ignore_checksum=ignore_checksum)
         self.language_code = data[2]
         offset = 3
         self.manufacturer = FruTypeLengthString(data, offset)
@@ -405,7 +405,7 @@ class FruPicmgPowerModuleCapabilityRecord(FruPicmgRecord):
     def _from_data(self, data, ignore_checksum=False):
         if len(data) < 12:
             raise DecodingError('data too short')
-        FruPicmgRecord._from_data(self, data)
+        FruPicmgRecord._from_data(self, data, ignore_checksum=ignore_checksum)
         maximum_current_output = data[10] | data[11] << 8
         self.maximum_current_output = float(maximum_current_output/10)
 
